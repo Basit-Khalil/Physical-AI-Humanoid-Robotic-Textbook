@@ -54,7 +54,8 @@
       "Bash(curl -X POST http://localhost:8001/chat_with_rag -H \"Content-Type: application/json\" -d \"{\"\"message\"\":\"\"What is Physical AI?\"\"}\")",
       "Bash(curl -X POST http://localhost:8001/chat -H \"Content-Type: application/json\" -H \"Origin: http://localhost:3001\" -d \"{\"\"message\"\":\"\"Hello, how are you?\"\"}\")",
       "Bash(findstr 8001)",
-      "Bash(curl -X POST http://localhost:8001/chat -H \"Content-Type: application/json\" -d \"{\"\"message\"\":\"\"Hello\"\"}\")"
+      "Bash(curl -X POST http://localhost:8001/chat -H \"Content-Type: application/json\" -d \"{\"\"message\"\":\"\"Hello\"\"}\")",
+      "Bash(git push origin main)"
     ],
     "deny": [],
     "ask": []
