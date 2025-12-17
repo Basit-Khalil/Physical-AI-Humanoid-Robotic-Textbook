@@ -1,0 +1,9 @@
+fastapi[all]
+uvicorn[standard]
+sentence-transformers
+qdrant-client
+asyncpg
+sqlalchemy
+psycopg2-binary
+openai
+python-dotenv
