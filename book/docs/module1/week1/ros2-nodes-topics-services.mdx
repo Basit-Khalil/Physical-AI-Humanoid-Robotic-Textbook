@@ -1,0 +1,218 @@
+---
+id: module1-week1-ros2-nodes-topics-services
+title: "ROS 2 Nodes, Topics, and Services"
+sidebar_label: "Chapter 2"
+---
+
+# ROS 2 Nodes, Topics, and Services
+
+<PersonalizeContentButton />
+<TranslateToUrduButton />
+
+## Overview
+This chapter delves into the core communication mechanisms of ROS 2: nodes, topics, and services. These form the fundamental building blocks for creating distributed robotic applications, especially critical for coordinating the complex systems within humanoid robots.
+
+## Learning Objectives
+- Understand the architecture of ROS 2 nodes and their lifecycle
+- Implement publishers and subscribers for asynchronous communication
+- Create and use services for synchronous request-response patterns
+- Design effective message schemas for humanoid robot communication
+- Apply Quality of Service (QoS) policies for reliable communication
+
+## ROS 2 Nodes
+In ROS 2, a node is the fundamental unit of execution. A node is a process that performs computation and communicates with other nodes through ROS 2's communication system. In humanoid robotics, nodes might represent:
+
+- Individual sensor drivers (camera, LiDAR, IMU)
+- Motor controllers for different joints
+- Perception modules (object detection, SLAM)
+- Planning modules (path planning, manipulation planning)
+- Behavioral state machines
+- UI interfaces
+
+### Node Architecture
+Each ROS 2 node typically includes:
+- Publishers and subscribers for asynchronous communication
+- Services and clients for synchronous communication
+- Parameters for configuration
+- Timers for periodic execution
+- Callback groups for managing concurrency
+
+## Topics and Publishing/Subscribing
+Topics enable asynchronous, many-to-many communication using a publish/subscribe model. This is ideal for streaming data like sensor readings, robot state information, or control commands.
+
+### Publisher Example
+```python
+import rclpy
+from rclpy.node import Node
+from sensor_msgs.msg import JointState
+
+class JointStatePublisher(Node):
+    def __init__(self):
+        super().__init__('joint_state_publisher')
+        self.publisher_ = self.create_publisher(JointState, 'joint_states', 10)
+
+    def publish_joint_states(self, joint_positions):
+        msg = JointState()
+        msg.name = ['hip_yaw', 'hip_roll', 'hip_pitch', 'knee', 'ankle_pitch', 'ankle_roll']
+        msg.position = joint_positions
+        self.publisher_.publish(msg)
+```
+
+### Subscriber Example
+```python
+import rclpy
+from rclpy.node import Node
+from sensor_msgs.msg import JointState
+
+class JointStateSubscriber(Node):
+    def __init__(self):
+        super().__init__('joint_state_subscriber')
+        self.subscription = self.create_subscription(
+            JointState,
+            'joint_states',
+            self.joint_state_callback,
+            10)
+
+    def joint_state_callback(self, msg):
+        self.get_logger().info(f'Received joint states: {msg.position}')
+```
+
+## Services and Request/Response
+Services provide synchronous, one-to-one communication with a guaranteed response. This is ideal for operations that require confirmation or have a definitive outcome.
+
+### Service Example
+```python
+import rclpy
+from rclpy.node import Node
+from example_interfaces.srv import Trigger
+
+class RobotMotionService(Node):
+    def __init__(self):
+        super().__init__('robot_motion_service')
+        self.srv = self.create_service(
+            Trigger,
+            'execute_motion_primitive',
+            self.execute_motion_callback)
+
+    def execute_motion_callback(self, request, response):
+        # Execute motion primitive (walk, turn, etc.)
+        success = self.perform_motion()
+        response.success = success
+        response.message = 'Motion primitive executed' if success else 'Failed to execute motion'
+        return response
+```
+
+## Actions for Long-Running Tasks
+Actions are used for long-running tasks that require feedback and the ability to cancel. This is particularly important for humanoid robots performing complex tasks:
+
+```python
+import rclpy
+from rclpy.action import ActionServer
+from rclpy.node import Node
+from control_msgs.action import FollowJointTrajectory
+
+class TrajectoryExecutor(Node):
+    def __init__(self):
+        super().__init__('trajectory_executor')
+        self._action_server = ActionServer(
+            self,
+            FollowJointTrajectory,
+            'follow_joint_trajectory',
+            self.execute_trajectory_callback)
+
+    async def execute_trajectory_callback(self, goal_handle):
+        # Execute the trajectory with feedback
+        feedback_msg = FollowJointTrajectory.Feedback()
+
+        for i, point in enumerate(goal_handle.request.trajectory.points):
+            # Execute trajectory point
+            feedback_msg.actual.positions = point.positions
+            goal_handle.publish_feedback(feedback_msg)
+
+            if goal_handle.is_cancel_requested:
+                goal_handle.canceled()
+                return FollowJointTrajectory.Result()
+
+        goal_handle.succeed()
+        return FollowJointTrajectory.Result()
+```
+
+## Quality of Service (QoS) in Humanoid Robotics
+QoS policies are critical for ensuring reliable communication in humanoid robots, where timing and reliability requirements vary significantly across different systems:
+
+- **Joint Control**: Requires reliable, low-latency communication (KEEP_LAST history, RELIABLE reliability)
+- **Sensor Data**: May tolerate some data loss but needs recent data (KEEP_LAST history, BEST_EFFORT reliability)
+- **Logging**: Can be lossy but should preserve important events (KEEP_ALL history, BEST_EFFORT reliability)
+
+### QoS Example
+```python
+from rclpy.qos import QoSProfile, ReliabilityPolicy, HistoryPolicy
+
+# For critical joint control
+control_qos = QoSProfile(
+    depth=1,
+    reliability=ReliabilityPolicy.RELIABLE,
+    history=HistoryPolicy.KEEP_LAST
+)
+
+# For sensor data where latest values matter most
+sensor_qos = QoSProfile(
+    depth=5,
+    reliability=ReliabilityPolicy.BEST_EFFORT,
+    history=HistoryPolicy.KEEP_LAST
+)
+
+# For logging where all messages matter
+logging_qos = QoSProfile(
+    depth=100,
+    reliability=ReliabilityPolicy.BEST_EFFORT,
+    history=HistoryPolicy.KEEP_ALL
+)
+```
+
+## Designing Effective Message Schemas
+When designing messages for humanoid robotics, consider:
+
+1. **Efficiency**: Minimize message size for real-time performance
+2. **Clarity**: Use descriptive field names and proper units
+3. **Extensibility**: Design for future additions without breaking compatibility
+4. **Standardization**: Leverage existing ROS message types when possible
+
+### Custom Message Example (.msg file)
+```
+# HumanoidJointStates.msg
+std_msgs/Header header
+string[] name
+float64[] position
+float64[] velocity
+float64[] effort
+float64[] temperature  # Additional field for humanoid joints
+uint8[] status         # Joint status flags
+```
+
+## Hands-on Exercise: Creating a Humanoid Communication Network
+Create a simple communication network for a humanoid robot with:
+1. A sensor node that publishes joint temperatures
+2. A controller node that subscribes to temperatures and adjusts cooling
+3. A service for requesting robot status
+
+1. Create the message structure and nodes
+2. Implement proper QoS policies for each communication channel
+3. Test the communication network with simulated data
+
+## Integration with Physical AI
+ROS 2 communication patterns align well with Physical AI principles:
+
+- **Embodied Communication**: Nodes represent physical components and their states
+- **Real-time Coordination**: QoS policies ensure timely coordination between components
+- **Distributed Intelligence**: Different nodes can implement specialized intelligence
+- **Sensorimotor Loops**: Topics facilitate tight coupling between perception and action
+
+## Summary
+ROS 2's communication architecture provides the foundation for complex humanoid robot systems. Understanding nodes, topics, services, and QoS policies is essential for creating robust, coordinated robot behavior. The next chapter will explore how to integrate Python agents with ROS 2 for advanced AI-driven control.
+
+## Next Steps
+- Implement the hands-on exercise above
+- Explore ROS 2 launch files for managing complex robot systems
+- Investigate ROS 2 parameters for runtime configuration
+- Research rosbridge for web-based robot interfaces

@@ -1,0 +1,88 @@
+---
+id: module3-week6-chapter12
+title: "Chapter 12: Humanoid Robot Kinematics and Balance Control"
+sidebar_label: "Chapter 12"
+---
+
+# Chapter 12: Humanoid Robot Kinematics and Balance Control
+
+<PersonalizeContentButton />
+<TranslateToUrduButton />
+
+## Understanding Humanoid Robot Kinematics and Balance
+
+Humanoid robot kinematics and balance control form the foundation of stable locomotion and manipulation. Unlike wheeled or simpler robots, humanoid robots must manage complex multi-link dynamics while maintaining balance during both static poses and dynamic movements. This requires sophisticated understanding of kinematics, dynamics, and control theory.
+
+### Forward and Inverse Kinematics
+
+Humanoid robots typically have multiple degrees of freedom (DOF) across their body structure:
+
+- **Forward Kinematics:** Calculates the position and orientation of end-effectors (hands, feet) given joint angles
+- **Inverse Kinematics:** Determines the required joint angles to achieve desired end-effector positions
+
+For humanoid robots, this becomes complex due to:
+- Redundant DOF (more joints than strictly necessary)
+- Multiple constraints (avoiding self-collisions, maintaining balance)
+- Closed kinematic chains (when both feet are on the ground)
+
+### Balance Control Principles
+
+Humanoid balance control relies on several key concepts:
+
+1.  **Zero Moment Point (ZMP):** A point where the net moment of ground reaction forces is zero. For stable walking, the ZMP must remain within the support polygon (foot area).
+
+2.  **Center of Mass (CoM) Control:** Managing the robot's center of mass to maintain stability during movement.
+
+3.  **Capture Point:** A point where the robot can come to a stop without falling, useful for balance recovery strategies.
+
+4.  **Whole-Body Control:** Coordinating all joints to achieve both task objectives and balance simultaneously.
+
+### Walking Pattern Generation
+
+Humanoid walking involves generating stable gait patterns:
+
+- **Static Walking:** Moving with at least one foot always in contact with the ground
+- **Dynamic Walking:** Allowing for phases where both feet are off the ground
+- **Footstep Planning:** Determining where to place feet for stable locomotion
+- **Trajectory Generation:** Creating smooth, stable trajectories for all joints
+
+### Control Strategies
+
+Various control approaches are used for humanoid balance:
+
+- **PID Control:** For basic joint position and velocity control
+- **Model Predictive Control (MPC):** For optimizing future balance over a prediction horizon
+- **Linear Inverted Pendulum Model (LIPM):** Simplified model for balance control
+- **Cart-Table Model:** Extension of LIPM for more complex balance scenarios
+- **Feedback Linearization:** For handling complex robot dynamics
+
+### Sensor Integration for Balance
+
+Humanoid robots rely on multiple sensors for balance:
+
+- **IMUs:** Provide information about robot orientation and angular velocity
+- **Force/Torque Sensors:** Measure ground reaction forces at feet
+- **Joint Encoders:** Provide precise joint position information
+- **Vision Systems:** For environment perception and obstacle avoidance
+
+### Challenges in Humanoid Locomotion
+
+- **Real-time Computation:** Balance control algorithms must run in real-time
+- **Disturbance Rejection:** Handling external forces and unexpected obstacles
+- **Terrain Adaptation:** Walking on uneven or dynamic terrain
+- **Energy Efficiency:** Minimizing power consumption while maintaining stability
+- **Human-like Movement:** Achieving natural, efficient movement patterns
+
+## Learning Objectives
+- Understand forward and inverse kinematics for humanoid robots
+- Implement balance control algorithms using ZMP and CoM concepts
+- Generate stable walking patterns for humanoid robots
+- Integrate sensor feedback for real-time balance control
+- Design control strategies for humanoid locomotion
+
+## Practical Tasks
+- Implement inverse kinematics solver for a humanoid robot arm
+- Simulate ZMP-based balance control for static poses
+- Generate walking trajectories using simplified models
+- Integrate IMU feedback for balance correction in simulation
+- Test balance recovery strategies in response to disturbances

@@ -1,0 +1,89 @@
+---
+id: module3-week5-chapter10
+title: "Chapter 10: Isaac ROS and Hardware-Accelerated Perception"
+sidebar_label: "Chapter 10"
+---
+
+# Chapter 10: Isaac ROS and Hardware-Accelerated Perception
+
+<PersonalizeContentButton />
+<TranslateToUrduButton />
+
+## Isaac ROS: Accelerating Robot Perception and Navigation
+
+Isaac ROS is a collection of hardware-accelerated software packages that enable robots to perceive and navigate the world more effectively. These packages leverage NVIDIA's GPU computing capabilities to accelerate perception, navigation, and manipulation tasks, making them particularly valuable for humanoid robots that require real-time processing of complex sensor data.
+
+### Core Isaac ROS Capabilities
+
+1.  **Visual Perception Acceleration:** Isaac ROS provides GPU-accelerated implementations of common computer vision algorithms:
+   - Stereo vision for depth estimation
+   - Object detection and tracking
+   - Semantic segmentation
+   - Feature detection and matching
+
+2.  **Sensor Processing:** Hardware-accelerated processing of various sensor types:
+   - Camera image processing pipelines
+   - LiDAR data processing
+   - Multi-sensor fusion
+   - Point cloud operations
+
+3.  **SLAM and Navigation:** GPU-accelerated Simultaneous Localization and Mapping (SLAM) and navigation:
+   - Visual-inertial odometry (VIO)
+   - 3D SLAM algorithms
+   - Path planning and obstacle avoidance
+   - Map building and localization
+
+4.  **Manipulation:** Accelerated algorithms for robotic manipulation:
+   - Grasp planning
+   - Motion planning
+   - Force control
+   - Hand-eye coordination
+
+### Hardware Acceleration Benefits
+
+Isaac ROS leverages NVIDIA's computing platforms to provide:
+
+- **Real-time Processing:** Complex perception tasks that would be impossible on CPU-only systems
+- **Energy Efficiency:** More computations per watt compared to CPU-only approaches
+- **Scalability:** Ability to process multiple sensor streams simultaneously
+- **Robustness:** More reliable real-time performance for safety-critical applications
+
+### Integration with ROS 2 Ecosystem
+
+Isaac ROS seamlessly integrates with the ROS 2 ecosystem:
+
+- **Standard Message Types:** Uses ROS 2 message types and conventions
+- **Launch System:** Integrates with ROS 2 launch system
+- **Parameter Management:** Uses ROS 2 parameter system
+- **TF Framework:** Works with ROS 2 transform framework
+
+### Key Isaac ROS Packages
+
+- **Isaac ROS Apriltag:** GPU-accelerated AprilTag detection for precise localization
+- **Isaac ROS Stereo DNN:** Real-time deep neural network inference on stereo images
+- **Isaac ROS VSLAM:** Visual-inertial SLAM with GPU acceleration
+- **Isaac ROS ISAAC:** Hardware abstraction layer for NVIDIA platforms
+- **Isaac ROS Image Pipeline:** GPU-accelerated image processing pipeline
+
+### Applications in Humanoid Robotics
+
+Isaac ROS is particularly valuable for humanoid robots that require:
+
+- **Real-time Vision Processing:** For navigation, manipulation, and human interaction
+- **Complex SLAM:** For localization in dynamic environments
+- **Multi-sensor Fusion:** Combining data from cameras, LiDAR, IMUs, and other sensors
+- **Energy Efficiency:** To maximize operational time on battery-powered robots
+
+## Learning Objectives
+- Understand the architecture and capabilities of Isaac ROS
+- Install and configure Isaac ROS on RTX-enabled platforms
+- Implement GPU-accelerated perception pipelines
+- Integrate Isaac ROS packages with existing ROS 2 systems
+- Optimize robot perception performance using hardware acceleration
+
+## Practical Tasks
+- Install Isaac ROS packages on an RTX-enabled development platform
+- Implement GPU-accelerated stereo vision for depth estimation
+- Set up Isaac ROS VSLAM for robot localization
+- Integrate Isaac ROS perception nodes with a humanoid robot simulation
+- Compare performance of GPU vs CPU implementations for key algorithms

@@ -1,0 +1,68 @@
+---
+id: module1-week2-chapter4
+title: "Chapter 4: ROS 2 Nodes, Topics, and Services"
+sidebar_label: "Chapter 4"
+---
+
+# Chapter 4: ROS 2 Nodes, Topics, and Services
+
+<PersonalizeContentButton />
+<TranslateToUrduButton />
+
+## ROS 2 Communication Patterns
+
+In ROS 2, communication between different parts of a robot system happens through three main patterns: nodes, topics (publish/subscribe), and services (request/response). Understanding these patterns is crucial for building effective humanoid robot systems where multiple components need to coordinate seamlessly.
+
+### Nodes: The Building Blocks
+
+Nodes are the fundamental execution units in ROS 2. Each node typically handles a specific function within the robot system:
+
+- **Sensor nodes:** Publish sensor data (camera images, LiDAR scans, IMU readings)
+- **Control nodes:** Handle actuator commands and robot motion
+- **Perception nodes:** Process sensor data to extract meaningful information
+- **Planning nodes:** Generate motion plans and trajectories
+- **Behavior nodes:** Implement high-level robot behaviors
+
+### Topics: Publish/Subscribe Communication
+
+Topics enable asynchronous communication between nodes using a publish/subscribe model:
+
+- **Publishers** send messages to a topic
+- **Subscribers** receive messages from a topic
+- Multiple publishers and subscribers can exist for the same topic
+- Messages are delivered on a best-effort basis
+
+This pattern is ideal for streaming data like sensor readings, robot state, or control commands that need to be broadcast to multiple components.
+
+### Services: Request/Response Communication
+
+Services provide synchronous communication with guaranteed delivery:
+
+- A **service client** sends a request and waits for a response
+- A **service server** processes the request and sends back a response
+- Useful for operations that require confirmation or have a clear outcome
+
+This pattern is ideal for operations like requesting robot calibration, executing a specific action with a guaranteed outcome, or querying robot state.
+
+### Quality of Service (QoS) Settings
+
+ROS 2 provides QoS settings to control message delivery characteristics:
+
+- **Reliability:** Whether messages must be delivered (reliable) or can be dropped (best effort)
+- **Durability:** Whether late-joining subscribers receive previous messages (transient local) or only new ones (volatile)
+- **History:** How many messages to store for delivery
+
+These settings are crucial for humanoid robots where some data (like safety-critical commands) must be delivered reliably while other data (like high-frequency sensor readings) can tolerate some loss.
+
+## Learning Objectives
+- Implement ROS 2 nodes for different robot functions
+- Create publishers and subscribers for streaming data
+- Develop service clients and servers for synchronous operations
+- Configure appropriate QoS settings for different robot data types
+- Design communication patterns for humanoid robot systems
+
+## Practical Tasks
+- Create a publisher node that publishes joint states of a simulated robot
+- Create a subscriber node that processes and displays the joint states
+- Implement a service that allows remote querying of robot battery status
+- Configure QoS settings appropriately for different types of robot data

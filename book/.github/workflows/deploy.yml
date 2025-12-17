@@ -1,0 +1,37 @@
+name: Deploy Docusaurus to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy to GitHub Pages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: | # Use npm ci to ensure clean install from package-lock.json
+          cd book
+          npm ci
+
+      - name: Build Docusaurus website
+        run: | # Build the site
+          cd book
+          npm run build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./book/build
+          # Ensure the base URL is correctly configured for GitHub Pages if needed
+          # cname: example.com # Uncomment and set your custom domain if applicable

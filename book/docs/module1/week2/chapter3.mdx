@@ -1,0 +1,45 @@
+---
+id: module1-week2-chapter3
+title: "Chapter 3: Introduction to ROS 2 Architecture"
+sidebar_label: "Chapter 3"
+---
+
+# Chapter 3: Introduction to ROS 2 Architecture
+
+<PersonalizeContentButton />
+<TranslateToUrduButton />
+
+## Understanding ROS 2 Fundamentals
+
+Robot Operating System 2 (ROS 2) is a flexible framework for writing robot software. It's a collection of tools, libraries, and conventions that aim to simplify the task of creating complex and robust robot behavior across a wide variety of robot platforms. In the context of humanoid robotics, ROS 2 serves as the communication backbone that allows different components of the robot to work together seamlessly.
+
+### Key Concepts in ROS 2
+
+1.  **Nodes:** A node is an executable that uses ROS 2 to communicate with other nodes. In humanoid robotics, different nodes might handle perception, planning, control, or hardware interfaces.
+
+2.  **Topics:** Topics are named buses over which nodes exchange messages. They enable asynchronous communication between nodes using a publish/subscribe model.
+
+3.  **Services:** Services provide synchronous request/response communication between nodes, useful for operations that require a direct response.
+
+4.  **Actions:** Actions are like services but for long-running tasks that may include feedback and the ability to cancel.
+
+5.  **Packages:** A package is the smallest unit of organization in ROS 2, containing nodes, libraries, and other resources.
+
+### ROS 2 Architecture
+
+ROS 2 uses a distributed architecture where nodes can run on different machines and communicate over a network. It implements the Data Distribution Service (DDS) standard for communication, which provides:
+
+- Discovery: Nodes automatically find each other on the network
+- Communication: Reliable message passing between nodes
+- Quality of Service (QoS): Configurable policies for message delivery
+
+## Learning Objectives
+- Explain the core concepts of ROS 2 (nodes, topics, services, actions)
+- Understand the distributed architecture of ROS 2
+- Identify the role of DDS in ROS 2 communication
+- Describe how ROS 2 enables communication in humanoid robot systems
+
+## Practical Tasks
+- Install ROS 2 (Humble Hawksbill or later) on your development machine
+- Create a simple ROS 2 workspace and package
+- Run the basic ROS 2 tutorials to understand nodes and topics

@@ -1,0 +1,80 @@
+---
+id: module3-week6-chapter11
+title: "Chapter 11: Nav2 for Bipedal Humanoid Navigation"
+sidebar_label: "Chapter 11"
+---
+
+# Chapter 11: Nav2 for Bipedal Humanoid Navigation
+
+<PersonalizeContentButton />
+<TranslateToUrduButton />
+
+## Navigation for Humanoid Robots with Nav2
+
+Navigation2 (Nav2) is ROS 2's state-of-the-art navigation framework that provides path planning, trajectory generation, and obstacle avoidance capabilities. For humanoid robots, Nav2 requires specialized configurations to handle the unique challenges of bipedal locomotion, including balance constraints, step planning, and dynamic stability during navigation.
+
+### Core Components of Nav2
+
+1.  **Global Planner:** Generates a high-level path from start to goal, considering static map information and known obstacles. For humanoid robots, this must account for step constraints and balance requirements.
+
+2.  **Local Planner:** Creates safe, dynamically feasible trajectories in real-time, avoiding both static and dynamic obstacles. For bipedal robots, this involves generating stable stepping patterns.
+
+3.  **Controller:** Executes the planned trajectories by sending commands to the robot's control system. For humanoid robots, this often involves complex whole-body control to maintain balance.
+
+4.  **Behavior Trees:** Orchestrate navigation behaviors using a tree-based structure, allowing for complex decision-making and recovery behaviors specific to humanoid locomotion.
+
+### Nav2 Architecture for Humanoid Robots
+
+Nav2's modular architecture allows for humanoid-specific customizations:
+
+- **Costmaps:** Modified to account for humanoid-specific constraints like step size limitations and balance margins
+- **Planners:** Adapted for bipedal-specific path planning with step sequence optimization
+- **Controllers:** Integrated with humanoid-specific control frameworks for stable locomotion
+- **Sensors:** Configured to work with humanoid-specific sensor configurations
+
+### Bipedal Navigation Challenges
+
+Humanoid navigation presents unique challenges that require specialized Nav2 configurations:
+
+- **Dynamic Balance:** Maintaining balance during movement requires careful trajectory planning
+- **Step Planning:** Each foot placement must be carefully planned for stability
+- **Limited Turning Radius:** Humanoid robots often have constraints on turning capabilities
+- **Obstacle Clearance:** Ensuring sufficient clearance for legs and arms during navigation
+- **Stair and Step Negotiation:** Specialized behaviors for navigating stairs and steps
+
+### Integration with Humanoid Control Systems
+
+Nav2 for humanoid robots must integrate with:
+
+- **Whole-Body Controllers:** To maintain balance during navigation
+- **Footstep Planners:** To generate stable stepping sequences
+- **ZMP (Zero Moment Point) Controllers:** For dynamic balance maintenance
+- **Sensor Fusion Systems:** To provide accurate localization and obstacle detection
+
+### Navigation Behaviors and Recovery
+
+Nav2 includes various behaviors for humanoid navigation:
+
+- **Recovery Behaviors:** Specialized recovery routines for humanoid-specific failure modes
+- **Calibration Behaviors:** To ensure accurate robot localization and sensor calibration
+- **Wait Behaviors:** For managing navigation in dynamic environments with humans
+
+### Advanced Navigation Techniques
+
+- **Human-Aware Navigation:** Considering human presence and social navigation norms
+- **Multi-Modal Navigation:** Combining walking, stair climbing, and other locomotion modes
+- **Collaborative Navigation:** Navigating in coordination with humans or other robots
+
+## Learning Objectives
+- Understand Nav2 architecture and its application to humanoid robots
+- Configure Nav2 for bipedal locomotion with balance constraints
+- Implement step planning and footstep generation for humanoid navigation
+- Integrate Nav2 with humanoid robot control systems
+- Design recovery behaviors for humanoid-specific navigation failures
+
+## Practical Tasks
+- Set up Nav2 for a simulated humanoid robot in Gazebo
+- Configure costmaps with humanoid-specific constraints
+- Implement a simple footstep planner for stable navigation
+- Test navigation in environments with varying complexity
+- Design recovery behaviors for common humanoid navigation challenges

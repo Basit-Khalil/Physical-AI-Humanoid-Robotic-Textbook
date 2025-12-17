@@ -1,0 +1,93 @@
+/**
+ * CSS files with the .module.css suffix will be treated as CSS modules
+ * and scoped locally.
+ */
+
+
+
+.heroBanner { padding: 4rem 0; text-align: center; position: relative; overflow: hidden; }
+
+
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 2rem;
+  }
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.textbookOverview h2 {
+  font-size: 2.25rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  color: #525151ff; /* darker gray for better contrast */
+}
+
+.textbookOverview p {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: #ffffffff; /* medium gray for text */
+}
+
+
+.textbookOverview {
+  width: 100%;
+  text-align: center;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 0; /* remove auto centering */
+  padding: 2rem 1rem; /* optional: add padding for spacing */
+  background: rgba(230, 230, 230, 0.8); /* optional: transparent light grey */
+}
+
+.textbookOverview {
+  background-color: #313235ff; /* light subtle background */
+  padding: 4rem 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.textbookOverview .container {
+  max-width: 800px;
+  text-align: center;
+  background: #e91e1eff;
+  padding: 2rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.textbookOverview h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #ffffffff; /* dark gray */
+}
+
+.textbookOverview p {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: #c5c1c1ff; /* medium gray */
+  margin-bottom: 1rem;
+}
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.featureCard {
+  background: rgba(109, 102, 102, 0.6); /* White with 60% opacity */
+  color: #fdfdfdff; /* Dark gray text for readability */
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,)
+
+}
+
+.featureCard:hover {
+  transform: translateY(-8px); /* lift effect */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); /* stronger shadow */
+}
