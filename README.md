@@ -2,6 +2,8 @@
 
 This project implements a comprehensive AI-Native Software Development educational platform featuring a Docusaurus-based book website with an integrated RAG (Retrieval-Augmented Generation) chatbot.
 
+Vercel link: https://physical-ai-humanoid-robotic-textbo.vercel.app/
+
 ## Features
 
 ### Frontend (Docusaurus)
